@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://b88cdfupsa555"]
+
+[ext_resource type="Script" uid="uid://b4yyime6golm3" path="res://scripts/bird.gd" id="1_3po83"]
+[ext_resource type="Texture2D" uid="uid://dielb64k565ep" path="res://art/bird.png" id="1_kqhkv"]
+[ext_resource type="AudioStream" uid="uid://ch7oy337cojhf" path="res://sound/flap.ogg" id="2_wings"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3po83"]
+atlas = ExtResource("1_kqhkv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq4t0"]
+atlas = ExtResource("1_kqhkv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_38or4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3po83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq4t0")
+}],
+"loop": 1,
+"name": &"flap",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_38or4"]
+radius = 6.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_38or4"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 60.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 300, 0)
+scale_min = 3.0
+scale_max = 4.0
+color = Color(0.25, 0.5, 0.75, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sparkle"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+color = Color(1, 0.9, 0.2, 1)
+
+[node name="Bird" type="RigidBody2D" unique_id=866494981]
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_3po83")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=98997368]
+sprite_frames = SubResource("SpriteFrames_38or4")
+animation = &"flap"
+autoplay = "flap"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1006809119]
+shape = SubResource("CircleShape2D_38or4")
+
+[node name="FeatherBurst" type="GPUParticles2D" parent="." unique_id=334322367]
+z_index = 2
+emitting = false
+amount = 20
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_38or4")
+
+[node name="Sparkle" type="GPUParticles2D" parent="." unique_id=721609122]
+emitting = false
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_sparkle")
+
+[node name="FlapSound" type="AudioStreamPlayer" parent="." unique_id=1216535547]
+stream = ExtResource("2_wings")
+volume_db = -8.0

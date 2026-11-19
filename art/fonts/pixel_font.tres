@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" format=3 uid="uid://b66raxypw2gwo"]
+
+[ext_resource type="FontFile" uid="uid://chhbhg145p3xu" path="res://art/fonts/NormalFont.ttf" id="1_58y3d"]
+
+[resource]
+base_font = ExtResource("1_58y3d")
+spacing_space = 5

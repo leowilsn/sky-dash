@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://mcv318qjhxxv"]
+
+[ext_resource type="Script" uid="uid://dyoqbiw6jdb2p" path="res://scripts/pipe_pair.gd" id="1_pipe"]
+[ext_resource type="Texture2D" uid="uid://cyhi5lx30ekds" path="res://art/background/tiles.png" id="2_m2bs7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pipe"]
+size = Vector2(32, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_score"]
+size = Vector2(8, 90)
+
+[node name="PipePair" type="Node2D" unique_id=1048814895]
+script = ExtResource("1_pipe")
+
+[node name="Top" type="Area2D" parent="." unique_id=1968452618]
+position = Vector2(0, -45)
+
+[node name="Body" type="NinePatchRect" parent="Top" unique_id=2003319071]
+offset_left = -18.0
+offset_top = -300.0
+offset_bottom = -150.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_m2bs7")
+region_rect = Rect2(288, 18, 18, 54)
+patch_margin_top = 18
+patch_margin_bottom = 18
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top" unique_id=1227658076]
+position = Vector2(0, -150)
+shape = SubResource("RectangleShape2D_pipe")
+
+[node name="Bottom" type="Area2D" parent="." unique_id=394164871]
+position = Vector2(0, 45)
+rotation = 3.14159
+
+[node name="Body" type="NinePatchRect" parent="Bottom" unique_id=1804110662]
+offset_left = -18.0
+offset_top = -300.0
+offset_bottom = -150.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_m2bs7")
+region_rect = Rect2(288, 18, 18, 54)
+patch_margin_top = 18
+patch_margin_bottom = 18
+axis_stretch_vertical = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom" unique_id=1242339128]
+position = Vector2(0, -150)
+shape = SubResource("RectangleShape2D_pipe")
+
+[node name="ScoreZone" type="Area2D" parent="." unique_id=839479400]
+position = Vector2(24, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreZone" unique_id=822623773]
+shape = SubResource("RectangleShape2D_score")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1601403611]
+
+[connection signal="body_entered" from="Top" to="." method="_on_pipe_body_entered"]
+[connection signal="body_entered" from="Bottom" to="." method="_on_pipe_body_entered"]
+[connection signal="body_entered" from="ScoreZone" to="." method="_on_score_zone_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

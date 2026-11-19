@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://1b0m0snx723c"]
+
+[ext_resource type="PackedScene" uid="uid://b88cdfupsa555" path="res://scenes/bird.tscn" id="1_bird"]
+[ext_resource type="Script" uid="uid://d2ftwp72cjc02" path="res://scripts/game.gd" id="2_game"]
+[ext_resource type="Texture2D" uid="uid://4yqy7ljomnpe" path="res://art/background/hills.png" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://cyhi5lx30ekds" path="res://art/background/tiles.png" id="4_tiles"]
+[ext_resource type="Texture2D" uid="uid://de2ygkkfm88jd" path="res://art/background/ground.png" id="5_ground"]
+[ext_resource type="Script" uid="uid://cqrjwy3ram52y" path="res://scripts/shake_camera.gd" id="6_cam"]
+[ext_resource type="AudioStream" path="res://sound/Coin.wav" id="7_coin"]
+[ext_resource type="AudioStream" path="res://sound/Hit1.wav" id="8_hit"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(480, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ceiling"]
+size = Vector2(480, 20)
+
+[node name="Game" type="Node2D" unique_id=656838386]
+script = ExtResource("2_game")
+
+[node name="Sky" type="ColorRect" parent="." unique_id=214853555]
+offset_right = 480.0
+offset_bottom = 270.0
+color = Color(0.875, 0.965, 0.96, 1)
+
+[node name="Clouds" type="Parallax2D" parent="." unique_id=1527545675]
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(-20, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Clouds" unique_id=569971851]
+position = Vector2(90, 50)
+scale = Vector2(2, 2)
+texture = ExtResource("4_tiles")
+region_enabled = true
+region_rect = Rect2(234, 126, 54, 18)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Clouds" unique_id=1018354542]
+position = Vector2(330, 95)
+scale = Vector2(2, 2)
+texture = ExtResource("4_tiles")
+region_enabled = true
+region_rect = Rect2(234, 126, 54, 18)
+
+[node name="Hills" type="Parallax2D" parent="." unique_id=1739911365]
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(-50, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Hills" unique_id=1128973952]
+texture_repeat = 2
+position = Vector2(0, 150)
+scale = Vector2(2, 2)
+texture = ExtResource("3_lnu2h")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 240, 24)
+
+[node name="Fill" type="ColorRect" parent="." unique_id=899873102]
+offset_top = 198.0
+offset_right = 480.0
+offset_bottom = 252.0
+color = Color(0.76, 0.89, 0.91, 1)
+
+[node name="GroundLayer" type="Parallax2D" parent="." unique_id=30743528]
+z_index = 1
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(-100, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="GroundLayer" unique_id=1403733071]
+texture_repeat = 2
+position = Vector2(0, 252)
+texture = ExtResource("5_ground")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 480, 18)
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=921697128]
+position = Vector2(240, 260)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=542877975]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="Ground" unique_id=209823426]
+visible = false
+offset_left = -240.0
+offset_top = -10.0
+offset_right = 240.0
+offset_bottom = 10.0
+color = Color(0.3, 0.7, 0.3, 1)
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=1056453930]
+position = Vector2(240, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=1258378107]
+shape = SubResource("RectangleShape2D_ceiling")
+
+[node name="Bird" parent="." unique_id=1664323429 instance=ExtResource("1_bird")]
+position = Vector2(120, 135)
+
+[node name="PipeTimer" type="Timer" parent="." unique_id=1440230186]
+wait_time = 2.0
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1815742665]
+
+[node name="ScoreLabel" type="Label" parent="HUD" unique_id=1915460579]
+offset_top = 8.0
+offset_right = 480.0
+offset_bottom = 53.0
+theme_override_colors/font_outline_color = Color(0.2, 0.2, 0.3, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+
+[node name="TapLabel" type="Label" parent="HUD"]
+offset_top = 180.0
+offset_right = 480.0
+offset_bottom = 204.0
+theme_override_colors/font_outline_color = Color(0.2, 0.2, 0.3, 1)
+theme_override_constants/outline_size = 6
+text = "TAP TO START"
+horizontal_alignment = 1
+
+[node name="GameOverPanel" type="Panel" parent="HUD" unique_id=1348507105]
+visible = false
+offset_left = 120.0
+offset_top = 60.0
+offset_right = 360.0
+offset_bottom = 210.0
+
+[node name="ScoreText" type="Label" parent="HUD/GameOverPanel" unique_id=686595911]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 240.0
+offset_bottom = 34.0
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="BestText" type="Label" parent="HUD/GameOverPanel" unique_id=1743210775]
+layout_mode = 0
+offset_top = 36.0
+offset_right = 240.0
+offset_bottom = 60.0
+text = "Best: 0"
+horizontal_alignment = 1
+
+[node name="RecordLabel" type="Label" parent="HUD/GameOverPanel" unique_id=1414109417]
+visible = false
+layout_mode = 0
+offset_top = 62.0
+offset_right = 240.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 20
+text = "NEW RECORD!"
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="HUD/GameOverPanel" unique_id=47625448]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 106.0
+offset_right = 110.0
+offset_bottom = 138.0
+text = "Retry"
+
+[node name="MenuButton" type="Button" parent="HUD/GameOverPanel" unique_id=1979492650]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 106.0
+offset_right = 220.0
+offset_bottom = 138.0
+text = "Menu"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1584796415]
+position = Vector2(240, 135)
+script = ExtResource("6_cam")
+
+[node name="PointSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_coin")
+
+[node name="CrashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_hit")
+
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="pressed" from="HUD/GameOverPanel/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="HUD/GameOverPanel/MenuButton" to="." method="_on_menu_button_pressed"]
