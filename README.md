@@ -15,7 +15,7 @@ https://novafrost1.itch.io/sky-dash
 
 ## Made with
 
-Godot 4.7
+Godot 4.7, at Ark Gamedev Academy
 
 ## Credits
 
