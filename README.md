@@ -7,6 +7,8 @@ A tiny endless flyer: a little bird flies through the gaps between bushes. One b
 - **Space** or **click** = flap
 - Fly through the gaps to score. Every 5 points the game gets faster.
 
+Best score so far: 27
+
 ## Play it
 
 https://novafrost1.itch.io/sky-dash
