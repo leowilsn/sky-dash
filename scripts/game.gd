@@ -4,7 +4,7 @@ const PIPE_SCENE: PackedScene = preload("res://scenes/pipe_pair.tscn")
 
 var score: int = 0
 var pipe_speed: float = 110.0
-var gap: float = 90.0
+var gap: float = 100.0
 var over: bool = false
 
 @onready var score_label: Label = $HUD/ScoreLabel
