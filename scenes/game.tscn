@@ -160,7 +160,7 @@ offset_left = 20.0
 offset_top = 106.0
 offset_right = 110.0
 offset_bottom = 138.0
-text = "Play again"
+text = "Again"
 
 [node name="MenuButton" type="Button" parent="HUD/GameOverPanel" unique_id=1979492650]
 layout_mode = 0
