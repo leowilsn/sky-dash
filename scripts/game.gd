@@ -3,7 +3,7 @@ extends Node2D
 const PIPE_SCENE: PackedScene = preload("res://scenes/pipe_pair.tscn")
 
 var score: int = 0
-var pipe_speed: float = 100.0
+var pipe_speed: float = 130.0
 var gap: float = 90.0
 var over: bool = false
 
