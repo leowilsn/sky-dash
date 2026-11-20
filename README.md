@@ -1,6 +1,6 @@
 # Sky Dash
 
-A tiny endless flyer: a little bird flies through the gaps between bushes. One button flaps, and the run lasts until you hit something.
+A small endless flyer: a little bird flies through the gaps between bushes. One button flaps, and the run lasts until you hit something.
 
 ## How to play
 
