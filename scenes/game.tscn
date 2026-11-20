@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cyhi5lx30ekds" path="res://art/background/tiles.png" id="4_tiles"]
 [ext_resource type="Texture2D" uid="uid://de2ygkkfm88jd" path="res://art/background/ground.png" id="5_ground"]
 [ext_resource type="Script" uid="uid://cqrjwy3ram52y" path="res://scripts/shake_camera.gd" id="6_cam"]
-[ext_resource type="AudioStream" path="res://sound/Coin.wav" id="7_coin"]
-[ext_resource type="AudioStream" path="res://sound/Hit1.wav" id="8_hit"]
+[ext_resource type="AudioStream" uid="uid://bbqhp6v0olhqu" path="res://sound/Coin.wav" id="7_coin"]
+[ext_resource type="AudioStream" uid="uid://bvy04evr0xu0r" path="res://sound/Hit1.wav" id="8_hit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(480, 20)
@@ -111,7 +111,7 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 1
 
-[node name="TapLabel" type="Label" parent="HUD"]
+[node name="TapLabel" type="Label" parent="HUD" unique_id=1100475343]
 offset_top = 180.0
 offset_right = 480.0
 offset_bottom = 204.0
@@ -160,7 +160,7 @@ offset_left = 20.0
 offset_top = 106.0
 offset_right = 110.0
 offset_bottom = 138.0
-text = "Retry"
+text = "Play again"
 
 [node name="MenuButton" type="Button" parent="HUD/GameOverPanel" unique_id=1979492650]
 layout_mode = 0
@@ -174,10 +174,10 @@ text = "Menu"
 position = Vector2(240, 135)
 script = ExtResource("6_cam")
 
-[node name="PointSound" type="AudioStreamPlayer" parent="."]
+[node name="PointSound" type="AudioStreamPlayer" parent="." unique_id=1423418555]
 stream = ExtResource("7_coin")
 
-[node name="CrashSound" type="AudioStreamPlayer" parent="."]
+[node name="CrashSound" type="AudioStreamPlayer" parent="." unique_id=1601783076]
 stream = ExtResource("8_hit")
 
 [connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
