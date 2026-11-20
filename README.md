@@ -13,6 +13,8 @@ Best score so far: 27
 
 https://novafrost1.itch.io/sky-dash
 
+Play in your browser: https://leowilsn.github.io/sky-dash/
+
 ## Made with
 
 Godot 4.7, at Ark Gamedev Academy
